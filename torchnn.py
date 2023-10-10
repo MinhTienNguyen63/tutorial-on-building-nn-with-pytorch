@@ -31,12 +31,21 @@ class ImageClassifier(nn.Module):
         return self.model(x)
 
 # Instance of the neural network, loss, optimizer 
-clf = ImageClassifier().to('cuda')
+clf = ImageClassifier().to('cpu')
 opt = Adam(clf.parameters(), lr=1e-3)
 loss_fn = nn.CrossEntropyLoss() 
 
 # Training flow 
 if __name__ == "__main__": 
+    # once the model is trained below, uncomment the code below and then comment the training code below line 48-71
+    
+    # with open('model_state.pt', 'rb') as f:
+    #     clf.load_state_dict(load(f))
+
+    # img = Image.open('img_3.jpg')
+    # img_tensor = ToTensor()(img).unsqueeze(0).to('cpu')
+    # print(torch.argmax(clf(img_tensor)))
+    
     for epoch in range(10): # train for 10 epochs
         for batch in dataset: 
             X,y = batch 
